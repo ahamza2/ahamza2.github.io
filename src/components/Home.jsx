@@ -13,6 +13,7 @@ const Home = () => {
         style={{ animationDelay: "1.5s" }}
       />
 
+
       <div className="max-w-6xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center pt-24">
         {/* Left: Text Content */}
         <div className="space-y-6 animate-fade-in-up">
