@@ -1,7 +1,7 @@
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import useTypingTerminal from "../hooks/useTypingTerminal";
 
-const Home = () => {
+const Home = ({ visitorName }) => {
   const { lines, typingText, showCursor, isTyping } = useTypingTerminal();
 
   return (
@@ -45,6 +45,11 @@ const Home = () => {
           <h2 className="text-xl md:text-2xl text-neutral-400 font-light">
             Full Stack Developer
           </h2>
+          {visitorName ? (
+            <p className="text-sm text-cyan-400 font-mono">
+              Welcome, {visitorName}
+            </p>
+          ) : null}
           <p className="text-neutral-500 max-w-md leading-relaxed">
             I build things from scratch — from low-level C programs to real-time web platforms. Currently a student at 1337 (42 Network), always looking for the next problem worth solving.
           </p>
