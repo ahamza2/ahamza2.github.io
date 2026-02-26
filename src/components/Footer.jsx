@@ -1,9 +1,24 @@
-// ✅ Footer.jsx
 const Footer = () => {
   return (
-    <footer className="py-6 px-[9%] flex flex-col md:flex-row justify-between items-center border-t border-gray-600 text-sm">
-      <p>&copy; 2025 by hamza aarab | All Rights Reserved</p>
-      <a href="#" className="text-[#00abf0] text-lg"><i className='bx bx-up-arrow-alt'></i></a>
+    <footer className="border-t border-neutral-800/50 py-8 px-6">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="flex items-center gap-2">
+          <span className="text-emerald-400 font-mono text-sm">~/hamza</span>
+          <span className="text-neutral-700">·</span>
+          <p className="text-neutral-600 text-sm">
+            © {new Date().getFullYear()} Hamza Aarab
+          </p>
+        </div>
+        <p className="text-neutral-700 text-xs font-mono">
+          Built with React + Tailwind · Deployed on GitHub Pages
+        </p>
+        <a
+          href="#home"
+          className="text-neutral-600 hover:text-emerald-400 transition-all duration-300 text-sm hover:-translate-y-0.5"
+        >
+          Back to top ↑
+        </a>
+      </div>
     </footer>
   );
 };

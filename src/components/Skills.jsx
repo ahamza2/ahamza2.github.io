@@ -1,72 +1,89 @@
-import React from "react";
+import useScrollReveal from "../hooks/useScrollReveal";
 
-const codingSkills = [
-  { skill: "C", level: "90%" },
-  { skill: "C++", level: "90%" },
-  { skill: "Python (Django)", level: "80%" },
-  { skill: "JavaScript (React)", level: "80%" },
-  { skill: "Shell Scripting", level: "80%" },
-  { skill: "Docker", level: "85%" },
+const skillCategories = [
+  {
+    title: "Languages",
+    color: "emerald",
+    skills: ["C", "C++", "Python", "JavaScript", "Dart", "Shell/Bash", "SQL"],
+  },
+  {
+    title: "Frameworks & Libraries",
+    color: "cyan",
+    skills: ["Django", "React", "Django REST Framework", "Flutter", "Tailwind CSS"],
+  },
+  {
+    title: "Tools & Platforms",
+    color: "amber",
+    skills: ["Docker", "Git", "PostgreSQL", "MariaDB", "Redis", "Nginx", "Linux"],
+  },
+  {
+    title: "Concepts",
+    color: "violet",
+    skills: ["REST APIs", "WebSockets", "TCP/IP", "OAuth 2.0", "CI/CD", "Microservices"],
+  },
 ];
 
-const proSkillsWithLevel = [
-  { skill: "Problem Solving", level: "95%" },
-  { skill: "Teamwork", level: "90%" },
-  { skill: "Fast Learner", level: "90%" },
-  { skill: "Clean Code Writing", level: "90%" },
-];
+const dotColors = {
+  emerald: "bg-emerald-400",
+  cyan: "bg-cyan-400",
+  amber: "bg-amber-400",
+  violet: "bg-violet-400",
+};
+
+const hoverColors = {
+  emerald: "hover:border-emerald-500/50 hover:text-emerald-400",
+  cyan: "hover:border-cyan-500/50 hover:text-cyan-400",
+  amber: "hover:border-amber-500/50 hover:text-amber-400",
+  violet: "hover:border-violet-500/50 hover:text-violet-400",
+};
 
 const Skills = () => {
-  return (
-    <section
-      id="skills"
-      className="min-h-screen  bg-[#081b29] text-white px-[9%] py-28"
-    >
-      <h2 className="text-4xl font-bold text-center mb-12">
-        My <span className="text-main">Skills</span>
-      </h2>
+  const [titleRef, titleVisible] = useScrollReveal();
+  const [gridRef, gridVisible] = useScrollReveal(0.1);
 
-      <div className="grid md:grid-cols-2 gap-10">
-        {/* Coding Skills */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-6 text-orange">Coding Skills</h3>
-          <div className="space-y-5">
-            {codingSkills.map(({ skill, level }, index) => (
-              <div key={index}>
-                <div className="flex justify-between mb-1">
-                  <span>{skill}</span>
-                  <span>{level}</span>
-                </div>
-                <div className="w-full bg-white/10 h-3 rounded-full">
-                  <div
-                    className="h-full bg-main rounded-full"
-                    style={{ width: level }}
-                  ></div>
-                </div>
-              </div>
-            ))}
-          </div>
+  return (
+    <section id="skills" className="py-28 px-6 relative">
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-cyan-500/3 rounded-full blur-[120px]" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div
+          ref={titleRef}
+          className={`transition-all duration-700 ${titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        >
+          <h2 className="section-title">
+            Tech <span className="gradient-text">Stack</span>
+          </h2>
+          <p className="section-subtitle">
+            Tools and technologies I work with on a daily basis.
+          </p>
         </div>
 
-        {/* Professional Skills */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-6 text-orange">Professional Skills</h3>
-          <div className="space-y-5">
-            {proSkillsWithLevel.map(({ skill, level }, index) => (
-              <div key={index}>
-                <div className="flex justify-between mb-1">
-                  <span>{skill}</span>
-                  <span>{level}</span>
-                </div>
-                <div className="w-full bg-white/10 h-3 rounded-full">
-                  <div
-                    className="h-full bg-orange rounded-full"
-                    style={{ width: level }}
-                  ></div>
-                </div>
+        <div
+          ref={gridRef}
+          className={`grid md:grid-cols-2 gap-6 transition-all duration-700 delay-200 ${gridVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        >
+          {skillCategories.map((category, i) => (
+            <div
+              key={i}
+              className="glass-card p-6 hover:border-white/10 transition-all duration-500"
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <h3 className="text-lg font-semibold text-neutral-200 mb-4 flex items-center gap-2">
+                <span className={`w-2 h-2 rounded-full ${dotColors[category.color]}`} />
+                {category.title}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill, j) => (
+                  <span
+                    key={j}
+                    className={`px-3 py-1.5 text-sm bg-neutral-800/80 text-neutral-300 rounded-lg border border-neutral-700/50 transition-all duration-300 cursor-default ${hoverColors[category.color]}`}
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
